@@ -16,3 +16,9 @@
 [submodule "bulma-ribbon"]
 	path = bulma-ribbon
 	url = https://wikiki@github.com/Wikiki/bulma-ribbon.git
+[submodule "bulma-divider"]
+	path = bulma-divider
+	url = https://wikiki@github.com/Wikiki/bulma-divider.git
+[submodule "bulma-calendar"]
+	path = bulma-calendar
+	url = https://wikiki@github.com/Wikiki/bulma-calendar.git
