@@ -1,0 +1,18 @@
+[submodule "bulma-timeline"]
+	path = bulma-timeline
+	url = https://wikiki@github.com/Wikiki/bulma-timeline.git
+[submodule "bulma-steps"]
+	path = bulma-steps
+	url = https://wikiki@github.com/Wikiki/bulma-steps.git
+[submodule "bulma-badge"]
+	path = bulma-badge
+	url = https://wikiki@github.com/Wikiki/bulma-badge.git
+[submodule "bulma-tooltip"]
+	path = bulma-tooltip
+	url = https://wikiki@github.com/Wikiki/bulma-tooltip.git
+[submodule "bulma-pageloader"]
+	path = bulma-pageloader
+	url = https://wikiki@github.com/Wikiki/bulma-pageloader.git
+[submodule "bulma-ribbon"]
+	path = bulma-ribbon
+	url = https://wikiki@github.com/Wikiki/bulma-ribbon.git
