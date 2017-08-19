@@ -22,3 +22,6 @@
 [submodule "bulma-calendar"]
 	path = bulma-calendar
 	url = https://wikiki@github.com/Wikiki/bulma-calendar.git
+[submodule "bulma-switch"]
+	path = bulma-switch
+	url = https://wikiki@github.com/Wikiki/bulma-switch.git
