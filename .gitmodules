@@ -25,3 +25,6 @@
 [submodule "bulma-switch"]
 	path = bulma-switch
 	url = https://wikiki@github.com/Wikiki/bulma-switch.git
+[submodule "bulma-checkradio"]
+	path = bulma-checkradio
+	url = https://wikiki@github.com/Wikiki/bulma-checkradio.git
