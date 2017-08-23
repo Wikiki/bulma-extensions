@@ -28,3 +28,6 @@
 [submodule "bulma-checkradio"]
 	path = bulma-checkradio
 	url = https://wikiki@github.com/Wikiki/bulma-checkradio.git
+[submodule "bulma-slider"]
+	path = bulma-slider
+	url = https://wikiki@github.com/Wikiki/bulma-slider.git
