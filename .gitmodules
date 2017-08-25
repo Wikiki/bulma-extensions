@@ -31,3 +31,6 @@
 [submodule "bulma-slider"]
 	path = bulma-slider
 	url = https://wikiki@github.com/Wikiki/bulma-slider.git
+[submodule "bulma-pricingtable"]
+	path = bulma-pricingtable
+	url = https://wikiki@github.com/Wikiki/bulma-pricingtable.git
