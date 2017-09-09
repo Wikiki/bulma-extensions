@@ -34,3 +34,6 @@
 [submodule "bulma-pricingtable"]
 	path = bulma-pricingtable
 	url = https://wikiki@github.com/Wikiki/bulma-pricingtable.git
+[submodule "bulma-quickview"]
+	path = bulma-quickview
+	url = https://wikiki@github.com/Wikiki/bulma-quickview.git
