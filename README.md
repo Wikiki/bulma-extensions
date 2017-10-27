@@ -2,6 +2,9 @@
 
 This repository provide a simple access to all extensions for Bulma.
 
+[![npm](https://img.shields.io/npm/v/bulma-extensions.svg)](https://www.npmjs.com/package/bulma-extensions)
+[![npm](https://img.shields.io/npm/dm/bulma-extensions.svg)](https://www.npmjs.com/package/bulma-extensions)
+
 Each extensions is a git submodule.
 
 # How to clone this repository
