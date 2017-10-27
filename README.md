@@ -10,7 +10,7 @@ Each extensions is a git submodule.
 # How to clone this repository
 
 ```
-git clone REPO_URL
+git clone https://github.com/Wikiki/bulma-extensions.git
 git submodule init
 git submodule update
 ```
@@ -18,7 +18,7 @@ git submodule update
 or
 
 ```
-git clone --recursive REPO_URL
+git clone --recursive https://github.com/Wikiki/bulma-extensions.git
 ```
 
 Related projects
