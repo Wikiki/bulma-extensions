@@ -1,8 +1,8 @@
 {
   "name": "bulma-extensions",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Set of extensions for Bulma.io CSS Framework",
-  "main": "index.js",
+  "main": "extensions.sass",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
