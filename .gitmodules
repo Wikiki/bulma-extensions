@@ -40,3 +40,6 @@
 [submodule "bulma-iconpicker"]
 	path = bulma-iconpicker
 	url = https://wikiki@github.com/Wikiki/bulma-iconpicker.git
+[submodule "bulma-accordion"]
+	path = bulma-accordion
+	url = https://wikiki@github.com/Wikiki/bulma-accordion.git
