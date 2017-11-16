@@ -23,5 +23,6 @@ git clone --recursive https://github.com/Wikiki/bulma-extensions.git
 
 Related projects
 --
-AxureRP is a great Library for Bulma and all the extensions: [Bulma.io-axure
+* AxureRP is a great Library for Bulma and all the extensions: [Bulma.io-axure
 ](https://github.com/Code-Mine-Development/Bulma.io-axure)
+* Preset for Bulma scaffolding on new Laravel 5.5.x project. [Laravel 5.5.x Front-end Preset For Bulma](https://github.com/laravel-frontend-presets/bulma)
