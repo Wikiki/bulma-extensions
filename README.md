@@ -7,6 +7,12 @@ This repository provide a simple access to all extensions for Bulma.
 
 Each extensions is a git submodule.
 
+
+Documentation & Demo
+---
+You can find the Documentation and a demo [here](https://wikiki.github.io/)
+
+
 # How to clone this repository
 
 ```
