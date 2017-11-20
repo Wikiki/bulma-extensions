@@ -43,3 +43,6 @@
 [submodule "bulma-accordion"]
 	path = bulma-accordion
 	url = https://wikiki@github.com/Wikiki/bulma-accordion.git
+[submodule "bulma-tagsinput"]
+	path = bulma-tagsinput
+	url = https://wikiki@github.com/Wikiki/bulma-tagsinput.git
