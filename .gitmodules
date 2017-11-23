@@ -46,3 +46,6 @@
 [submodule "bulma-tagsinput"]
 	path = bulma-tagsinput
 	url = https://wikiki@github.com/Wikiki/bulma-tagsinput.git
+[submodule "bulma-carousel"]
+	path = bulma-carousel
+	url = https://wikiki@github.com/Wikiki/bulma-carousel.git
