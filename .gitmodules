@@ -49,3 +49,6 @@
 [submodule "bulma-carousel"]
 	path = bulma-carousel
 	url = https://wikiki@github.com/Wikiki/bulma-carousel.git
+[submodule "bulma"]
+	path = bulma
+	url = https://wikiki@github.com/jgthms/bulma.git
