@@ -38,146 +38,6 @@
   font-size: 1.5rem;
 }
 
-.accordions .accordion.is-white {
-  background-color: white;
-}
-
-.accordions .accordion.is-white .message-header {
-  background-color: white;
-  color: #0a0a0a;
-}
-
-.accordions .accordion.is-white .message-body {
-  border-color: white;
-  color: #4d4d4d;
-}
-
-.accordions .accordion.is-black {
-  background-color: #fafafa;
-}
-
-.accordions .accordion.is-black .message-header {
-  background-color: #0a0a0a;
-  color: white;
-}
-
-.accordions .accordion.is-black .message-body {
-  border-color: #0a0a0a;
-  color: #090909;
-}
-
-.accordions .accordion.is-light {
-  background-color: #fafafa;
-}
-
-.accordions .accordion.is-light .message-header {
-  background-color: whitesmoke;
-  color: #363636;
-}
-
-.accordions .accordion.is-light .message-body {
-  border-color: whitesmoke;
-  color: #505050;
-}
-
-.accordions .accordion.is-dark {
-  background-color: #fafafa;
-}
-
-.accordions .accordion.is-dark .message-header {
-  background-color: #363636;
-  color: whitesmoke;
-}
-
-.accordions .accordion.is-dark .message-body {
-  border-color: #363636;
-  color: #2a2a2a;
-}
-
-.accordions .accordion.is-primary {
-  background-color: #f5fffd;
-}
-
-.accordions .accordion.is-primary .message-header {
-  background-color: #00d1b2;
-  color: #fff;
-}
-
-.accordions .accordion.is-primary .message-body {
-  border-color: #00d1b2;
-  color: #021310;
-}
-
-.accordions .accordion.is-link {
-  background-color: #f6f9fe;
-}
-
-.accordions .accordion.is-link .message-header {
-  background-color: #3273dc;
-  color: #fff;
-}
-
-.accordions .accordion.is-link .message-body {
-  border-color: #3273dc;
-  color: #22509a;
-}
-
-.accordions .accordion.is-info {
-  background-color: #f6fbfe;
-}
-
-.accordions .accordion.is-info .message-header {
-  background-color: #209cee;
-  color: #fff;
-}
-
-.accordions .accordion.is-info .message-body {
-  border-color: #209cee;
-  color: #12537e;
-}
-
-.accordions .accordion.is-success {
-  background-color: #f6fef9;
-}
-
-.accordions .accordion.is-success .message-header {
-  background-color: #23d160;
-  color: #fff;
-}
-
-.accordions .accordion.is-success .message-body {
-  border-color: #23d160;
-  color: #0e301a;
-}
-
-.accordions .accordion.is-warning {
-  background-color: #fffdf5;
-}
-
-.accordions .accordion.is-warning .message-header {
-  background-color: #ffdd57;
-  color: rgba(0, 0, 0, 0.7);
-}
-
-.accordions .accordion.is-warning .message-body {
-  border-color: #ffdd57;
-  color: #3b3108;
-}
-
-.accordions .accordion.is-danger {
-  background-color: #fff5f7;
-}
-
-.accordions .accordion.is-danger .message-header {
-  background-color: #ff3860;
-  color: #fff;
-}
-
-.accordions .accordion.is-danger .message-body {
-  border-color: #ff3860;
-  color: #cd0930;
-}
-
 .accordions .accordion:not(:first-child) .accordion-header {
   border-radius: 0;
 }
@@ -288,6 +148,146 @@
   -moz-transition: max-height 2s ease;
   -o-transition: max-height 2s ease;
   transition: max-height 2s ease;
+}
+
+.accordions .accordion.is-white {
+  background-color: white;
+}
+
+.accordions .accordion.is-white .accordion-header {
+  background-color: white;
+  color: #0a0a0a;
+}
+
+.accordions .accordion.is-white .accordion-body {
+  border-color: white;
+  color: #4d4d4d;
+}
+
+.accordions .accordion.is-black {
+  background-color: #fafafa;
+}
+
+.accordions .accordion.is-black .accordion-header {
+  background-color: #0a0a0a;
+  color: white;
+}
+
+.accordions .accordion.is-black .accordion-body {
+  border-color: #0a0a0a;
+  color: #090909;
+}
+
+.accordions .accordion.is-light {
+  background-color: #fafafa;
+}
+
+.accordions .accordion.is-light .accordion-header {
+  background-color: whitesmoke;
+  color: #363636;
+}
+
+.accordions .accordion.is-light .accordion-body {
+  border-color: whitesmoke;
+  color: #505050;
+}
+
+.accordions .accordion.is-dark {
+  background-color: #fafafa;
+}
+
+.accordions .accordion.is-dark .accordion-header {
+  background-color: #363636;
+  color: whitesmoke;
+}
+
+.accordions .accordion.is-dark .accordion-body {
+  border-color: #363636;
+  color: #2a2a2a;
+}
+
+.accordions .accordion.is-primary {
+  background-color: #f5fffd;
+}
+
+.accordions .accordion.is-primary .accordion-header {
+  background-color: #00d1b2;
+  color: #fff;
+}
+
+.accordions .accordion.is-primary .accordion-body {
+  border-color: #00d1b2;
+  color: #021310;
+}
+
+.accordions .accordion.is-link {
+  background-color: #f6f9fe;
+}
+
+.accordions .accordion.is-link .accordion-header {
+  background-color: #3273dc;
+  color: #fff;
+}
+
+.accordions .accordion.is-link .accordion-body {
+  border-color: #3273dc;
+  color: #22509a;
+}
+
+.accordions .accordion.is-info {
+  background-color: #f6fbfe;
+}
+
+.accordions .accordion.is-info .accordion-header {
+  background-color: #209cee;
+  color: #fff;
+}
+
+.accordions .accordion.is-info .accordion-body {
+  border-color: #209cee;
+  color: #12537e;
+}
+
+.accordions .accordion.is-success {
+  background-color: #f6fef9;
+}
+
+.accordions .accordion.is-success .accordion-header {
+  background-color: #23d160;
+  color: #fff;
+}
+
+.accordions .accordion.is-success .accordion-body {
+  border-color: #23d160;
+  color: #0e301a;
+}
+
+.accordions .accordion.is-warning {
+  background-color: #fffdf5;
+}
+
+.accordions .accordion.is-warning .accordion-header {
+  background-color: #ffdd57;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.accordions .accordion.is-warning .accordion-body {
+  border-color: #ffdd57;
+  color: #3b3108;
+}
+
+.accordions .accordion.is-danger {
+  background-color: #fff5f7;
+}
+
+.accordions .accordion.is-danger .accordion-header {
+  background-color: #ff3860;
+  color: #fff;
+}
+
+.accordions .accordion.is-danger .accordion-body {
+  border-color: #ff3860;
+  color: #cd0930;
 }
 
 .badge {
