@@ -1,0 +1,22 @@
+{
+  "name": "bulma-extensions",
+  "description": "Set of extensions for Bulma.io CSS Framework",
+  "main": "extensions.sass",
+  "authors": [
+    "Wikiki <wikiki@protonmail.com> (https://wikiki.github.io/bulma-extensions/overview)"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "bulma",
+    "extensions",
+    "bulma.io"
+  ],
+  "homepage": "https://github.com/Wikiki/bulma-extensions",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
