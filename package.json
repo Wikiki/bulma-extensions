@@ -1,6 +1,6 @@
 {
   "name": "bulma-extensions",
-  "version": "0.7.4",
+  "version": "0.7.5",
   "description": "Set of extensions for Bulma.io CSS Framework",
   "main": "extensions.sass",
   "scripts": {
