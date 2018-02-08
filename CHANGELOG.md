@@ -2,7 +2,14 @@
 
 ## [Unreleased](https://github.com/wikiki/bulma-extensions/tree/HEAD)
 
-[Full Changelog](https://github.com/wikiki/bulma-extensions/compare/v0.5.2...HEAD)
+[Full Changelog](https://github.com/wikiki/bulma-extensions/compare/v0.7.7...HEAD)
+
+**Implemented enhancements:**
+
+- Carousel sliding switch Features [\#27](https://github.com/Wikiki/bulma-extensions/issues/27)
+
+## [v0.7.7](https://github.com/wikiki/bulma-extensions/tree/v0.7.7) (2018-02-07)
+[Full Changelog](https://github.com/wikiki/bulma-extensions/compare/v0.5.2...v0.7.7)
 
 **Implemented enhancements:**
 
