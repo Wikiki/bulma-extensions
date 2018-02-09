@@ -1,16 +1,23 @@
-var gulp = require('gulp');
+var package                     = require('./package.json')
+var gulp                        = require('gulp');
 
 // Define variables.
-var autoprefixer  = require('autoprefixer');
-var babel         = require('gulp-babel');
-var cleancss      = require('gulp-clean-css');
-var concat        = require('gulp-concat');
-var del           = require('del');
-var gulp          = require('gulp');
-var postcss       = require('gulp-postcss');
-var runSequence   = require('run-sequence');
-var sass          = require('gulp-sass');
-var uglify        = require('gulp-uglify');
+var autoprefixer                = require('autoprefixer');
+var babel                       = require('gulp-babel');
+var bump                        = require('gulp-bump');
+var cleancss                    = require('gulp-clean-css');
+var concat                      = require('gulp-concat');
+var conventionalChangelog       = require('gulp-conventional-changelog');
+var conventionalGithubReleaser  = require('conventional-github-releaser');
+var del                         = require('del');
+var fs                          = require('fs');
+var git                         = require('gulp-git');
+var gutil                       = require('gulp-util');
+var postcss                     = require('gulp-postcss');
+var runSequence                 = require('run-sequence');
+var sass                        = require('gulp-sass');
+var spawn                       = require('child_process').spawn;
+var uglify                      = require('gulp-uglify');
 
 /**
  * ----------------------------------------
@@ -23,12 +30,13 @@ var paths = {
   bulma: 'node_modules/bulma/sass/utilities/',
   jsPattern: '**/*.js'
 }
-var globalSassFile = 'bulma-extensions.sass';
+var globalSassFile = package.name + '.sass';
+var globalJsFile   = package.name + '.sass';
 var bulmaSassFile  = '_all.sass';
-var mainSassFile   = 'extensions.sass';
-var distCssFile    = 'bulma-extensions.min.css';
-var mainJsFile     = 'extensions.js';
-var distJsFile     = 'extensions.min.js';
+var mainSassFile   = 'extension.sass';
+var distCssFile    = package.name + '.min.css';
+var mainJsFile     = 'extension.js';
+var distJsFile     = package.name + '.min.js';
 
 /**
  * ----------------------------------------
@@ -54,6 +62,7 @@ gulp.task('build:styles', ['build:styles:copy'], function() {
 // Copy original sass file to dist
 gulp.task('build:styles:copy', function() {
   return gulp.src(paths.src + mainSassFile)
+    .pipe(concat(globalSassFile))
     .pipe(gulp.dest(paths.dest));
 });
 
@@ -93,6 +102,7 @@ gulp.task('build:scripts', ['build:scripts:copy'], function() {
 // Copy original sripts file to dist
 gulp.task('build:scripts:copy', function() {
   return gulp.src(paths.src + mainJsFile)
+    .pipe(concat(globalJsFile))
     .pipe(gulp.dest(paths.dest));
 });
 
@@ -124,3 +134,93 @@ gulp.task('build', function(callback) {
  * ----------------------------------------
  */
 gulp.task('default', ['build']);
+
+/**
+ * ----------------------------------------
+ *  GENERATE CHANGELOG
+ * ----------------------------------------
+ */
+gulp.task('changelog', function () {
+  return gulp.src('CHANGELOG.md')
+    .pipe(conventionalChangelog({
+      preset: 'angular'
+    }))
+    .pipe(gulp.dest('./'));
+});
+
+/**
+ * ----------------------------------------
+ *  GENERATE GITHUB RELEASE
+ * ----------------------------------------
+ */
+gulp.task('github:release', function(done) {
+  conventionalGithubReleaser({
+    type: "oauth",
+    token: process.env.GITHUB_TOKEN
+  }, {
+    preset: 'angular'
+  }, done);
+});
+
+/**
+ * ----------------------------------------
+ *  UPDATE
+ * ----------------------------------------
+ */
+gulp.task('bump-version', function () {
+  return gulp.src(['./bower.json', './package.json'])
+    .pipe(bump({type: gutil.env.type ? gutil.env.type : 'patch' })
+    .on('error', gutil.log))
+    .pipe(gulp.dest('./'));
+});
+
+
+gulp.task('github:commit', function () {
+  return gulp.src('.')
+    .pipe(git.add())
+    .pipe(git.commit('[Prerelease] Bumped version number'));
+});
+
+gulp.task('github:push', function (cb) {
+  git.push('origin', 'master', cb);
+});
+
+gulp.task('github:create-new-tag', function (cb) {
+  var version = getPackageJsonVersion();
+  git.tag(version, 'Created Tag for version: ' + version, function (error) {
+    if (error) {
+      return cb(error);
+    }
+    git.push('origin', 'master', {args: '--tags'}, cb);
+  });
+
+  function getPackageJsonVersion () {
+    // We parse the json file instead of using require because require caches
+    // multiple calls so the version number won't be updated
+    return JSON.parse(fs.readFileSync('./package.json', 'utf8')).version;
+  };
+});
+
+gulp.task('npm:publish', function (done) {
+  spawn('npm', ['publish'], { stdio: 'inherit' }).on('close', done);
+});
+
+gulp.task('release', function (callback) {
+  runSequence(
+    'build',
+    'bump-version',
+    'changelog',
+    'github:commit',
+    'github:push',
+    'github:create-new-tag',
+    'github:release',
+    'npm:publish',
+    function (error) {
+      if (error) {
+        console.log(error.message);
+      } else {
+        console.log('RELEASE FINISHED SUCCESSFULLY');
+      }
+      callback(error);
+    });
+});
