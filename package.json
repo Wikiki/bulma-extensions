@@ -1,6 +1,6 @@
 {
   "name": "bulma-tooltip",
-  "version": "0.7.9",
+  "version": "0.7.10",
   "description": "Set of extensions for Bulma.io CSS Framework",
   "main": "extensions.sass",
   "scripts": {
