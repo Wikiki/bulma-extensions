@@ -1,3 +1,19 @@
+<a name="0.7.8"></a>
+## [0.7.8](https://github.com/Wikiki/bulma-extensions/compare/v0.7.7...v0.7.8) (2018-02-09)
+
+
+### Bug Fixes
+
+* **bower:** Add missing version ([9c2f5cd](https://github.com/Wikiki/bulma-extensions/commit/9c2f5cd))
+* **package.json:** Update dev dependencies ([4c05742](https://github.com/Wikiki/bulma-extensions/commit/4c05742))
+
+
+### Features
+
+* **gulp:** Add release task ([5013f94](https://github.com/Wikiki/bulma-extensions/commit/5013f94))
+
+
+
 # Change Log
 
 ## [Unreleased](https://github.com/wikiki/bulma-extensions/tree/HEAD)
