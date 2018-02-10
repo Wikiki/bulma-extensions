@@ -1,3 +1,13 @@
+<a name="0.7.17"></a>
+## [0.7.17](https://github.com/Wikiki/bulma-extensions/compare/0.7.8...0.7.17) (2018-02-10)
+
+
+### Bug Fixes
+
+* **package:** Correct version number ([acef172](https://github.com/Wikiki/bulma-extensions/commit/acef172))
+
+
+
 <a name="0.7.8"></a>
 ## [0.7.8](https://github.com/Wikiki/bulma-extensions/compare/0.7.12...0.7.8) (2018-02-10)
 

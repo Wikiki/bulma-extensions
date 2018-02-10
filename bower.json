@@ -2,7 +2,7 @@
   "name": "bulma-extensions",
   "description": "Set of extensions for Bulma.io CSS Framework",
   "main": "extensions.sass",
-  "version": "0.7.16",
+  "version": "0.7.17",
   "authors": [
     "Wikiki <wikiki@protonmail.com> (https://wikiki.github.io/bulma-extensions/overview)"
   ],
