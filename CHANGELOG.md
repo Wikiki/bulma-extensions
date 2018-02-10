@@ -1,3 +1,14 @@
+<a name="0.7.8"></a>
+## [0.7.8](https://github.com/Wikiki/bulma-extensions/compare/0.7.12...0.7.8) (2018-02-10)
+
+
+### Bug Fixes
+
+* **gulp:** Use UMD modules style ([facedb7](https://github.com/Wikiki/bulma-extensions/commit/facedb7))
+* **package:** Wrong package name ([dc97388](https://github.com/Wikiki/bulma-extensions/commit/dc97388))
+
+
+
 <a name="0.7.15"></a>
 ## [0.7.15](https://github.com/Wikiki/bulma-extensions/compare/v0.7.7...v0.7.15) (2018-02-10)
 
