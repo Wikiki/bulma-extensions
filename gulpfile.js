@@ -89,6 +89,7 @@ gulp.task('build:scripts', ['build:scripts:copy'], function() {
     .pipe(babel({
       "presets": [
         ["@babel/preset-env",  {
+          "modules": "umd",
           "targets": {
             "browsers": ["last 2 versions"]
           }
