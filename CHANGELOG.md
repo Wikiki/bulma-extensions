@@ -1,3 +1,13 @@
+<a name="1.0.0"></a>
+# [1.0.0](https://github.com/Wikiki/bulma-extensions/compare/0.7.18...1.0.0) (2018-02-10)
+
+
+### Features
+
+* **rollup:** Integrate Rollup for ES6 transpilation ([4d77fd6](https://github.com/Wikiki/bulma-extensions/commit/4d77fd6))
+
+
+
 <a name="0.7.18"></a>
 ## [0.7.18](https://github.com/Wikiki/bulma-extensions/compare/0.7.17...0.7.18) (2018-02-10)
 
