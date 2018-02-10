@@ -30,12 +30,12 @@ var paths = {
   bulma: 'node_modules/bulma/sass/utilities/',
   jsPattern: '**/*.js'
 }
-var globalSassFile = package.name + '.sass';
-var globalJsFile   = package.name + '.sass';
 var bulmaSassFile  = '_all.sass';
+var globalSassFile = package.name + '.sass';
+var globalJsFile   = package.name + '.js';
 var mainSassFile   = 'extension.sass';
-var distCssFile    = package.name + '.min.css';
 var mainJsFile     = 'extension.js';
+var distCssFile    = package.name + '.min.css';
 var distJsFile     = package.name + '.min.js';
 
 /**
@@ -89,6 +89,7 @@ gulp.task('build:scripts', ['build:scripts:copy'], function() {
     .pipe(babel({
       "presets": [
         ["@babel/preset-env",  {
+          "modules": "umd",
           "targets": {
             "browsers": ["last 2 versions"]
           }
@@ -114,8 +115,11 @@ gulp.task('clean:scripts', function(callback) {
   callback();
 });
 
-// Deletes the entire _site directory.
-gulp.task('clean', ['clean:scripts', 'clean:styles']);
+// Deletes the entire dist directory.
+gulp.task('clean', ['clean:scripts', 'clean:styles'], function(callback) {
+  del(paths.dest);
+  callback();
+});
 
 /**
  * ----------------------------------------
