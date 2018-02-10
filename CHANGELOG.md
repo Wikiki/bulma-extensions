@@ -1,3 +1,15 @@
+<a name="0.7.12"></a>
+## [0.7.12](https://github.com/Wikiki/bulma-extensions/compare/0.7.11...0.7.12) (2018-02-10)
+
+
+### Bug Fixes
+
+* **gulp:** Correct ddist filenames ([f157159](https://github.com/Wikiki/bulma-extensions/commit/f157159))
+* **package:** Correct file paths ([84e4064](https://github.com/Wikiki/bulma-extensions/commit/84e4064))
+* **travis:** Remove Travis CI ([fce7986](https://github.com/Wikiki/bulma-extensions/commit/fce7986))
+
+
+
 <a name="0.7.11"></a>
 ## [0.7.11](https://github.com/Wikiki/bulma-extensions/compare/v0.7.7...v0.7.11) (2018-02-09)
 
