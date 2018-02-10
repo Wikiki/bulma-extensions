@@ -1,8 +1,8 @@
 {
   "name": "bulma-extensions",
-  "version": "0.7.12",
+  "version": "0.7.13",
   "description": "Set of extensions for Bulma.io CSS Framework",
-  "main": "extensions.sass",
+  "main": "dist/bulma-extensions.sass",
   "scripts": {
     "build": "gulp"
   },
@@ -43,7 +43,7 @@
     "run-sequence": "^2.2.1"
   },
   "files": [
-    "dist/extensions.sass",
+    "dist/bulma-extensions.sass",
     "dist/bulma-extensions.min.css",
     "bulma-accordion/dist/bulma-accordion.sass",
     "bulma-accordion/dist/bulma-accordion.css",
