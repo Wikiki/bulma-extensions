@@ -1,3 +1,22 @@
+<a name="0.7.15"></a>
+## [0.7.15](https://github.com/Wikiki/bulma-extensions/compare/v0.7.7...v0.7.15) (2018-02-10)
+
+
+### Bug Fixes
+
+* **bower:** Add missing version ([9c2f5cd](https://github.com/Wikiki/bulma-extensions/commit/9c2f5cd))
+* **gulp:** Correct ddist filenames ([f355b58](https://github.com/Wikiki/bulma-extensions/commit/f355b58))
+* **package:** Correct file paths ([4d9cd49](https://github.com/Wikiki/bulma-extensions/commit/4d9cd49))
+* **package.json:** Update dev dependencies ([4c05742](https://github.com/Wikiki/bulma-extensions/commit/4c05742))
+* **travis:** Remove Travis CI ([a577814](https://github.com/Wikiki/bulma-extensions/commit/a577814))
+
+
+### Features
+
+* **gulp:** Add release task ([5013f94](https://github.com/Wikiki/bulma-extensions/commit/5013f94))
+
+
+
 <a name="0.7.14"></a>
 ## [0.7.14](https://github.com/Wikiki/bulma-extensions/compare/0.7.13...0.7.14) (2018-02-10)
 
