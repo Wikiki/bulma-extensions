@@ -5,6 +5,7 @@ var gulp                        = require('gulp');
 var autoprefixer                = require('autoprefixer');
 var babel                       = require('gulp-babel');
 var bump                        = require('gulp-bump');
+var camelCase                   = require('camelcase');
 var cleancss                    = require('gulp-clean-css');
 var concat                      = require('gulp-concat');
 var conventionalChangelog       = require('gulp-conventional-changelog');
@@ -14,10 +15,12 @@ var fs                          = require('fs');
 var git                         = require('gulp-git');
 var gutil                       = require('gulp-util');
 var postcss                     = require('gulp-postcss');
+var rollup                      = require('gulp-better-rollup');
 var runSequence                 = require('run-sequence');
 var sass                        = require('gulp-sass');
+var sourcemaps                  = require('gulp-sourcemaps');
 var spawn                       = require('child_process').spawn;
-var uglify                      = require('gulp-uglify');
+var minify                      = require('gulp-babel-minify');
 
 /**
  * ----------------------------------------
@@ -44,27 +47,27 @@ var distJsFile     = package.name + '.min.js';
  * ----------------------------------------
  */
 
-// Uses Sass compiler to process styles, adds vendor prefixes, minifies, then
-// outputs file to the appropriate location.
-gulp.task('build:styles', ['build:styles:copy'], function() {
-  return gulp.src([paths.bulma + bulmaSassFile, paths.src + mainSassFile])
-    .pipe(concat(globalSassFile))
-    .pipe(sass({
-      style: 'compressed',
-      includePaths: [paths.bulma]
-    }))
-    .pipe(concat(distCssFile))
-    .pipe(postcss([autoprefixer({browsers: ['last 2 versions']})]))
-    .pipe(cleancss())
-    .pipe(gulp.dest(paths.dest));
-});
+ // Uses Sass compiler to process styles, adds vendor prefixes, minifies, then
+ // outputs file to the appropriate location.
+ gulp.task('build:styles', ['build:styles:copy'], function() {
+   return gulp.src([paths.bulma + bulmaSassFile, paths.src + mainSassFile])
+     .pipe(concat(globalSassFile))
+     .pipe(sass({
+       style: 'compressed',
+       includePaths: [paths.bulma]
+     }))
+     .pipe(concat(distCssFile))
+     .pipe(postcss([autoprefixer({browsers: ['last 2 versions']})]))
+     .pipe(cleancss())
+     .pipe(gulp.dest(paths.dest));
+ });
 
-// Copy original sass file to dist
-gulp.task('build:styles:copy', function() {
-  return gulp.src(paths.src + mainSassFile)
-    .pipe(concat(globalSassFile))
-    .pipe(gulp.dest(paths.dest));
-});
+ // Copy original sass file to dist
+ gulp.task('build:styles:copy', function() {
+   return gulp.src(paths.src + mainSassFile)
+     .pipe(concat(globalSassFile))
+     .pipe(gulp.dest(paths.dest));
+ });
 
 gulp.task('clean:styles', function(callback) {
   del([
@@ -82,28 +85,38 @@ gulp.task('clean:styles', function(callback) {
 
 // Concatenates and uglifies global JS files and outputs result to the
 // appropriate location.
-gulp.task('build:scripts', ['build:scripts:copy'], function() {
+gulp.task('build:scripts', function() {
   return gulp
     .src([paths.src + paths.jsPattern])
-    .pipe(concat(distJsFile))
-    .pipe(babel({
-      "presets": [
-        ["@babel/preset-env",  {
-          "modules": "umd",
-          "targets": {
-            "browsers": ["last 2 versions"]
-          }
-        }]
-      ]
+    .pipe(sourcemaps.init({
+      loadMaps: true
     }))
-    .pipe(uglify())
-    .pipe(gulp.dest(paths.dest));
-});
-
-// Copy original sripts file to dist
-gulp.task('build:scripts:copy', function() {
-  return gulp.src(paths.src + mainJsFile)
+    .pipe(rollup({
+        plugins: [babel({
+          babelrc: false,
+          sourceMaps: true,
+          exclude: 'node_modules/**',
+          presets: [
+            ["@babel/preset-env",  {
+              "modules": false,
+              "targets": {
+                "browsers": gutil.env.babelTarget ? gutil.env.babelTarget : ["last 2 versions"]
+              }
+            }]
+          ]
+        })]
+      }, {
+        format: gutil.env.jsFormat ? gutil.env.jsFormat : 'iife',
+        name: camelCase(package.name)
+      }
+    ))
     .pipe(concat(globalJsFile))
+    .pipe(gulp.dest(paths.dest))
+    .pipe(concat(distJsFile))
+    .pipe(minify().on('error', function(err) {
+      gutil.log(gutil.colors.red('[Error]'), err.toString())
+    }))
+    .pipe(sourcemaps.write())
     .pipe(gulp.dest(paths.dest));
 });
 
