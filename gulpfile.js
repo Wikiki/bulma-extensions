@@ -47,21 +47,27 @@ var distJsFile     = package.name + '.min.js';
  * ----------------------------------------
  */
 
-// Uses Sass compiler to process styles, adds vendor prefixes, minifies, then
-// outputs file to the appropriate location.
-gulp.task('build:styles', function() {
-  return gulp.src([paths.bulma + bulmaSassFile, paths.src + mainSassFile])
-    .pipe(concat(globalSassFile))
-    .pipe(gulp.dest(paths.dest))
-    .pipe(sass({
-      style: 'compressed',
-      includePaths: [paths.bulma]
-    }))
-    .pipe(concat(distCssFile))
-    .pipe(postcss([autoprefixer({browsers: ['last 2 versions']})]))
-    .pipe(cleancss())
-    .pipe(gulp.dest(paths.dest));
-});
+ // Uses Sass compiler to process styles, adds vendor prefixes, minifies, then
+ // outputs file to the appropriate location.
+ gulp.task('build:styles', ['build:styles:copy'], function() {
+   return gulp.src([paths.bulma + bulmaSassFile, paths.src + mainSassFile])
+     .pipe(concat(globalSassFile))
+     .pipe(sass({
+       style: 'compressed',
+       includePaths: [paths.bulma]
+     }))
+     .pipe(concat(distCssFile))
+     .pipe(postcss([autoprefixer({browsers: ['last 2 versions']})]))
+     .pipe(cleancss())
+     .pipe(gulp.dest(paths.dest));
+ });
+
+ // Copy original sass file to dist
+ gulp.task('build:styles:copy', function() {
+   return gulp.src(paths.src + mainSassFile)
+     .pipe(concat(globalSassFile))
+     .pipe(gulp.dest(paths.dest));
+ });
 
 gulp.task('clean:styles', function(callback) {
   del([
