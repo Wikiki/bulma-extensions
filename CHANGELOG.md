@@ -1,3 +1,13 @@
+<a name="1.0.3"></a>
+## [1.0.3](https://github.com/Wikiki/bulma-extensions/compare/1.0.2...1.0.3) (2018-02-22)
+
+
+### Bug Fixes
+
+* **babel:** ES6 Transpilation output format ([c5383b4](https://github.com/Wikiki/bulma-extensions/commit/c5383b4))
+
+
+
 <a name="1.0.2"></a>
 ## [1.0.2](https://github.com/Wikiki/bulma-extensions/compare/1.0.1...1.0.2) (2018-02-13)
 
