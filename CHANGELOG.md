@@ -1,3 +1,14 @@
+<a name="1.0.4"></a>
+## [1.0.4](https://github.com/Wikiki/bulma-extensions/compare/1.0.3...1.0.4) (2018-03-05)
+
+
+### Bug Fixes
+
+* **js:** Not defined variable ([ef8158d](https://github.com/Wikiki/bulma-extensions/commit/ef8158d))
+* **navigation:** Previous makes jump ([36dd13d](https://github.com/Wikiki/bulma-extensions/commit/36dd13d))
+
+
+
 <a name="1.0.3"></a>
 ## [1.0.3](https://github.com/Wikiki/bulma-extensions/compare/1.0.2...1.0.3) (2018-02-22)
 
