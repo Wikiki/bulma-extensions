@@ -1,3 +1,13 @@
+<a name="1.0.31"></a>
+## [1.0.31](https://github.com/Wikiki/bulma-extensions/compare/1.0.30...1.0.31) (2018-05-25)
+
+
+### Bug Fixes
+
+* vertical divider ([830fe07](https://github.com/Wikiki/bulma-extensions/commit/830fe07))
+
+
+
 <a name="1.0.30"></a>
 ## [1.0.30](https://github.com/Wikiki/bulma-extensions/compare/1.0.29...1.0.30) (2018-05-14)
 
