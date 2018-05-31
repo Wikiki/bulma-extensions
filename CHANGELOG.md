@@ -1,3 +1,13 @@
+<a name="1.0.32"></a>
+## [1.0.32](https://github.com/Wikiki/bulma-extensions/compare/1.0.31...1.0.32) (2018-05-31)
+
+
+### Bug Fixes
+
+* add attach static method ([097c134](https://github.com/Wikiki/bulma-extensions/commit/097c134))
+
+
+
 <a name="1.0.31"></a>
 ## [1.0.31](https://github.com/Wikiki/bulma-extensions/compare/1.0.30...1.0.31) (2018-05-25)
 
