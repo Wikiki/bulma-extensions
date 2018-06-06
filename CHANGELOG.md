@@ -1,3 +1,8 @@
+<a name="1.0.34"></a>
+## [1.0.34](https://github.com/Wikiki/bulma-extensions/compare/1.0.33...1.0.34) (2018-06-06)
+
+
+
 <a name="1.0.33"></a>
 ## [1.0.33](https://github.com/Wikiki/bulma-extensions/compare/1.0.32...1.0.33) (2018-06-06)
 
