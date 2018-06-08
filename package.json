@@ -1,6 +1,5 @@
 {
   "name": "bulma-extensions",
-  "version": "1.0.34",
   "description": "Set of extensions for Bulma.io CSS Framework",
   "main": "dist/extensions.sass",
   "scripts": {
@@ -25,6 +24,7 @@
     "@babel/core": "^7.0.0-beta.39",
     "@babel/preset-env": "^7.0.0-beta.39",
     "babel-core": "^7.0.0-beta.3",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "bulma": "^0.6.2",
     "camelcase": "^4.1.0",
     "conventional-github-releaser": "^2.0.0",
