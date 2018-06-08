@@ -3,11 +3,13 @@
   "description": "Set of extensions for Bulma.io CSS Framework",
   "main": "dist/extensions.sass",
   "scripts": {
-    "build": "gulp"
+    "build": "gulp",
+    "travis-deploy-once": "travis-deploy-once",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://wikiki@github.com/Wikiki/bulma-extensions.git"
+    "url": "https://github.com/Wikiki/bulma-extensions.git"
   },
   "keywords": [
     "bulma",
@@ -45,7 +47,9 @@
     "gulp-uglify": "^3.0.0",
     "gulp-util": "^3.0.8",
     "rollup-plugin-babel": "^3.0.3",
-    "run-sequence": "^2.2.1"
+    "run-sequence": "^2.2.1",
+    "travis-deploy-once": "^5.0.0",
+    "semantic-release": "^15.5.1"
   },
   "files": [
     "dist/extensions.sass",
@@ -117,5 +121,6 @@
     "bulma-tooltip/dist/bulma-tooltip.min.css",
     "LICENSE",
     "README.md"
-  ]
+  ],
+  "version": "1.1.0"
 }
