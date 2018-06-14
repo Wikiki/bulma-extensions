@@ -3875,6 +3875,19 @@ var bulmaSteps = function (_EventEmitter) {
           _this2.next_btn.addEventListener(event, _this2[onStepsNext], false);
         });
       }
+
+      if (this.options.stepClickable) {
+        [].forEach.call(this.steps, function (step, index) {
+          _this2._clickEvents.forEach(function (event) {
+            while (index > _this2.current_id) {
+              _this2[onStepsNext](event);
+            }
+            while (index < _this2.current_id) {
+              _this2[onStepsPrevious](event);
+            }
+          });
+        });
+      }
     }
   }, {
     key: onStepsPrevious,
@@ -4258,6 +4271,7 @@ var defaultOptions = {
     'next_selector': '[data-nav="next"]',
     'active_class': 'is-active',
     'completed_class': 'is-completed',
+    'stepClickable': false,
     'beforeNext': null,
     'onShow': null,
     'onFinish': null,
