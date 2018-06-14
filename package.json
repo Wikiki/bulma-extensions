@@ -6,7 +6,7 @@
   "version": "2.2.0",
   "scripts": {
     "build": "gulp",
-    "release": "gulp && git add . && npm run commit && npm publish ./",
+    "release": "gulp && git add . && npm run commit && git push && npm publish ./",
     "commit": "git-cz",
     "precommit": "npm test",
     "travis-deploy-once": "travis-deploy-once",
