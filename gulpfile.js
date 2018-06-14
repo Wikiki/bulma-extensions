@@ -1,137 +1,164 @@
-var package                     = require('./package.json')
-var gulp                        = require('gulp');
 
-// Define variables.
-var autoprefixer                = require('autoprefixer');
-var babel                       = require('gulp-babel');
-var bump                        = require('gulp-bump');
-var camelCase                   = require('camelcase');
-var cleancss                    = require('gulp-clean-css');
-var concat                      = require('gulp-concat');
-var conventionalChangelog       = require('gulp-conventional-changelog');
-var conventionalGithubReleaser  = require('conventional-github-releaser');
-var del                         = require('del');
-var fs                          = require('fs');
-var git                         = require('gulp-git');
-var gutil                       = require('gulp-util');
-var postcss                     = require('gulp-postcss');
-var rollup                      = require('gulp-better-rollup');
-var runSequence                 = require('run-sequence');
-var sass                        = require('gulp-sass');
-var sourcemaps                  = require('gulp-sourcemaps');
-var spawn                       = require('child_process').spawn;
-var minify                      = require('gulp-babel-minify');
+const pkg                 = require('./package.json');
+const gulp                = require('gulp');
+const webpack             = require('webpack');
+const webpackStream       = require('webpack-stream');
+
+const autoprefixer        = require('autoprefixer');
+const camelCase           = require('camelcase');
+const cleancss            = require('gulp-clean-css');
+const colors              = require('ansi-colors');
+const concat              = require('gulp-concat');
+const del                 = require('del');
+const fs				  = require('fs');
+const log                 = require('fancy-log');
+const nop                  = require('gulp-nop');
+const postcss             = require('gulp-postcss');
+const sass                = require('gulp-sass');
+const uglify              = require('gulp-uglify');
 
 /**
  * ----------------------------------------
  *  VARIABLES
  * ----------------------------------------
  */
-var paths = {
-  src: 'src/',
-  dest: 'dist/',
-  bulma: 'node_modules/bulma/sass/utilities/',
-  jsPattern: '**/*.js'
-}
-var bulmaSassFile  = '_all.sass';
-var globalSassFile = package.name + '.sass';
-var globalJsFile   = package.name + '.js';
-var mainSassFile   = 'extension.sass';
-var mainJsFile     = 'extension.js';
-var distCssFile    = package.name + '.min.css';
-var distJsFile     = package.name + '.min.js';
+const paths = {
+	src:  'src/',
+	dist: 'dist/',
+	bulma: 'node_modules/bulma/sass/utilities/'
+};
+const config = {
+	sass: {
+		input: 'index.sass',
+		dependencies: ['node_modules/bulma/sass/utilities/_all.sass'],
+		output: {
+			filename: pkg.name,
+			format: 'compressed'
+		},
+		source: paths.src + 'sass/',
+		destination: paths.dist + 'css/'
+	},
+	javascript: {
+		input: 'index.js',
+		output: {
+			name: camelCase(pkg.name),
+			filename: pkg.name,
+			format: 'umd'
+		},
+		source: paths.src + 'js/',
+		destination: paths.dist + 'js/'
+	}
+};
 
 /**
  * ----------------------------------------
- *  STYLESHEETS
+ *  BUILD STYLESHEETS TASKS
  * ----------------------------------------
  */
+// Uses Sass compiler to process styles, adds vendor prefixes, minifies, then
+// outputs file to the appropriate location.
+gulp.task('build:styles', function() {
+	if (fs.existsSync(config.sass.source + config.sass.input)) {
+		return gulp
+			.src(config.sass.dependencies.concat([config.sass.source + config.sass.input]))
+			.pipe(concat(config.sass.output.filename + '.sass'))
+			.pipe(sass({
+				style: config.sass.output.format,
+				trace: true,
+				loadPath: [config.sass.source],
+				includePaths: ['node_modules/bulma/sass/utilities/']
+			}))
+			.pipe(concat(config.sass.output.filename + (config.sass.output.format === 'compressed' ? '.min' : '') + '.css'))
+			.pipe(postcss([autoprefixer({browsers: pkg.broswers})]))
+			.pipe(cleancss())
+			.pipe(gulp.dest(config.sass.destination));
+	} else {
+		return gulp.src('.').pipe(nop());
+	}
+});
 
- // Uses Sass compiler to process styles, adds vendor prefixes, minifies, then
- // outputs file to the appropriate location.
- gulp.task('build:styles', ['build:styles:copy'], function() {
-   return gulp.src([paths.bulma + bulmaSassFile, paths.src + mainSassFile])
-     .pipe(concat(globalSassFile))
-     .pipe(sass({
-       style: 'compressed',
-       includePaths: [paths.bulma]
-     }))
-     .pipe(concat(distCssFile))
-     .pipe(postcss([autoprefixer({browsers: ['last 2 versions']})]))
-     .pipe(cleancss())
-     .pipe(gulp.dest(paths.dest));
- });
+// Copy original sass file to dist
+gulp.task('build:styles:copy', function() {
+	if (fs.existsSync(config.sass.source + config.sass.input)) {
+		return gulp.src(config.sass.source + config.sass.input)
+			.pipe(concat(config.sass.output.filename + '.sass'))
+			.pipe(gulp.dest(config.sass.destination));
+	} else {
+		return gulp.src('.').pipe(nop());
+	}
+});
 
- // Copy original sass file to dist
- gulp.task('build:styles:copy', function() {
-   return gulp.src(paths.src + mainSassFile)
-     .pipe(concat(globalSassFile))
-     .pipe(gulp.dest(paths.dest));
- });
-
-gulp.task('clean:styles', function(callback) {
-  del([
-    paths.dest + mainSassFile,
-    paths.dest + distCssFile
-  ]);
-  callback();
+gulp.task('clean:styles', function() {
+	return del([
+		config.sass.destination + config.sass.output.filename + '.sass',
+		config.sass.destination + config.sass.output.filename + (config.sass.output.format === 'compressed' ? '.min' : '') + '.css'
+	]);
 });
 
 /**
  * ----------------------------------------
- *  JAVASCRIPT
+ *  BUILD JAVASCRIPT TASKS
  * ----------------------------------------
  */
 
 // Concatenates and uglifies global JS files and outputs result to the
 // appropriate location.
 gulp.task('build:scripts', function() {
-  return gulp
-    .src([paths.src + paths.jsPattern])
-    .pipe(sourcemaps.init({
-      loadMaps: true
-    }))
-    .pipe(rollup({
-        plugins: [babel({
-          babelrc: false,
-          sourceMaps: true,
-          exclude: 'node_modules/**',
-          presets: [
-            ["@babel/preset-env",  {
-              "modules": false,
-              "targets": {
-                "browsers": gutil.env.babelTarget ? gutil.env.babelTarget : ["last 2 versions"]
-              }
-            }]
-          ]
-        })]
-      }, {
-        format: gutil.env.jsFormat ? gutil.env.jsFormat : 'iife',
-        name: camelCase(package.name)
-      }
-    ))
-    .pipe(concat(globalJsFile))
-    .pipe(gulp.dest(paths.dest))
-    .pipe(concat(distJsFile))
-    .pipe(minify().on('error', function(err) {
-      gutil.log(gutil.colors.red('[Error]'), err.toString())
-    }))
-    .pipe(sourcemaps.write())
-    .pipe(gulp.dest(paths.dest));
+	if (fs.existsSync(config.javascript.source + config.javascript.input)) {
+		return gulp
+			.src(config.javascript.source + config.javascript.input)
+			.pipe(webpackStream({
+				output: {
+					filename: config.javascript.output.filename + '.js',
+					library: config.javascript.output.name,
+					libraryTarget: config.javascript.output.format,
+					libraryExport: 'default'
+				},
+				module: {
+					rules: [
+						{
+							test: /\.(js|jsx)$/,
+							exclude: /(node_modules)/,
+							loader: 'babel-loader',
+							options: {
+								babelrc: './babelrc'
+							}
+						},
+					],
+				}
+			}), webpack)
+			.pipe(concat(config.javascript.output.filename + '.js'))
+			.pipe(gulp.dest(config.javascript.destination))
+			.pipe(concat(config.javascript.output.filename + '.min.js'))
+			.pipe(uglify().on('error', function(err) {
+				log(colors.red('[Error]'), err.toString());
+			}))
+			.pipe(gulp.dest(config.javascript.destination)
+				.on('error', function(err) {
+					log(colors.red('[Error]'), err.toString());
+				})
+			);
+	} else {
+		return gulp.src('.').pipe(nop());
+	}
 });
 
-gulp.task('clean:scripts', function(callback) {
-  del([
-    paths.dest + mainJsFile,
-    paths.dest + distJsFile
-  ]);
-  callback();
+gulp.task('clean:scripts', function() {
+	return del([
+		config.javascript.destination + config.javascript.output.filename + '.js',
+		config.javascript.destination + config.javascript.output.filename + '.min.js'
+	]);
 });
 
+
+/**
+ * ----------------------------------------
+ *  GLOBAL CLEAN
+ * ----------------------------------------
+ */
 // Deletes the entire dist directory.
-gulp.task('clean', ['clean:scripts', 'clean:styles'], function(callback) {
-  del(paths.dest);
-  callback();
+gulp.task('clean', function() {
+	return del(paths.dist);
 });
 
 /**
@@ -139,105 +166,15 @@ gulp.task('clean', ['clean:scripts', 'clean:styles'], function(callback) {
  *  GLOBAL BUILD
  * ----------------------------------------
  */
-gulp.task('build', function(callback) {
-  runSequence('clean',
-    ['build:scripts', 'build:styles'],
-    callback);
-});
+gulp.task('build', gulp.series('clean', 'build:styles', 'build:styles:copy', 'build:scripts', function(callback) {
+	callback();
+}));
 
 /**
  * ----------------------------------------
  *  DEFAULT TASK
  * ----------------------------------------
  */
-gulp.task('default', ['build']);
-
-/**
- * ----------------------------------------
- *  GENERATE CHANGELOG
- * ----------------------------------------
- */
-gulp.task('changelog', function () {
-  return gulp.src('CHANGELOG.md')
-    .pipe(conventionalChangelog({
-      preset: 'angular'
-    }))
-    .pipe(gulp.dest('./'));
-});
-
-/**
- * ----------------------------------------
- *  GENERATE GITHUB RELEASE
- * ----------------------------------------
- */
-gulp.task('github:release', function(done) {
-  conventionalGithubReleaser({
-    type: "oauth",
-    token: process.env.GITHUB_TOKEN
-  }, {
-    preset: 'angular'
-  }, done);
-});
-
-/**
- * ----------------------------------------
- *  UPDATE
- * ----------------------------------------
- */
-gulp.task('bump-version', function () {
-  return gulp.src(['./bower.json', './package.json'])
-    .pipe(bump({type: gutil.env.type ? gutil.env.type : 'patch' })
-    .on('error', gutil.log))
-    .pipe(gulp.dest('./'));
-});
-
-
-gulp.task('github:commit', function () {
-  return gulp.src('.')
-    .pipe(git.add())
-    .pipe(git.commit('[Prerelease] Bumped version number'));
-});
-
-gulp.task('github:push', function (cb) {
-  git.push('origin', 'master', cb);
-});
-
-gulp.task('github:create-new-tag', function (cb) {
-  var version = getPackageJsonVersion();
-  git.tag(version, 'Created Tag for version: ' + version, function (error) {
-    if (error) {
-      return cb(error);
-    }
-    git.push('origin', 'master', {args: '--tags'}, cb);
-  });
-
-  function getPackageJsonVersion () {
-    // We parse the json file instead of using require because require caches
-    // multiple calls so the version number won't be updated
-    return JSON.parse(fs.readFileSync('./package.json', 'utf8')).version;
-  };
-});
-
-gulp.task('npm:publish', function (done) {
-  spawn('npm', ['publish'], { stdio: 'inherit' }).on('close', done);
-});
-
-gulp.task('release', function (callback) {
-  runSequence(
-    'build',
-    'bump-version',
-    'changelog',
-    'github:commit',
-    'github:push',
-    'github:create-new-tag',
-    'github:release',
-    'npm:publish',
-    function (error) {
-      if (error) {
-        console.log(error.message);
-      } else {
-        console.log('RELEASE FINISHED SUCCESSFULLY');
-      }
-      callback(error);
-    });
-});
+gulp.task('default', gulp.series('build', function(done) {
+	done();
+}));
