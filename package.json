@@ -3,7 +3,7 @@
   "description": "Set of extensions for Bulma.io CSS Framework",
   "main": "./dist/js/bulma-extensions.min.js",
   "style": "./dist/css/bulma-extensions.moin.css",
-  "version": "2.1.3",
+  "version": "2.1.4",
   "scripts": {
     "build": "gulp",
     "commit": "git-cz",
