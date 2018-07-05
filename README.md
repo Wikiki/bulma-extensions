@@ -15,6 +15,7 @@ You can find the Documentation and a demo [here](https://wikiki.github.io/)
 
 ```
 git clone https://github.com/Wikiki/bulma-extensions.git
+cd bulma-extensions
 git submodule init
 git submodule update
 ```
