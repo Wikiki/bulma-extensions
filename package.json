@@ -1,9 +1,10 @@
 {
   "name": "bulma-extensions",
   "description": "Set of extensions for Bulma.io CSS Framework",
-  "main": "./dist/js/bulma-extensions.min.js",
-  "style": "./dist/css/bulma-extensions.min.css",
-  "version": "6.2.3",
+  "main": "dist/js/bulma-extensions.min.js",
+  "style": "dist/css/bulma-extensions.min.css",
+  "sass": "src/sass/index.sass",
+  "version": "6.2.4",
   "scripts": {
     "build": "gulp",
     "commit": "git-cz",
