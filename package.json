@@ -4,7 +4,7 @@
   "main": "dist/js/bulma-extensions.min.js",
   "style": "dist/css/bulma-extensions.min.css",
   "sass": "src/sass/index.sass",
-  "version": "6.2.4",
+  "version": "6.2.5",
   "scripts": {
     "build": "gulp",
     "commit": "git-cz",
