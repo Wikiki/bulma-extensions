@@ -19,7 +19,7 @@ Here is the list:
 * **Slider**: https://github.com/Wikiki/bulma-slider
 * **Steps**: https://github.com/Wikiki/bulma-steps (_Refactoring in progress_)
 * **Switch**: https://github.com/Wikiki/bulma-switch (_Refactoring in progress_)
-* **TagsInput**: https://github.com/Wikiki/bulma-tagsinput (_Refactoring in progress_)
+* **TagsInput**: Now called [bulma-tagsinput](https://github.com/CreativeBulma/bulma-tagsinput) and migrated to the new repository: https://github.com/CreativeBulma/bulma-tagsinput
 * **Timeline**: https://github.com/Wikiki/bulma-timeline
 * **Tooltip**: Now called [bulma-tooltip](https://github.com/CreativeBulma/bulma-tooltip) and migrated to the new repository: https://github.com/CreativeBulma/bulma-tooltip
 
